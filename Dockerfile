@@ -1,19 +1,22 @@
+# Wybor obrazu bazowego
 FROM node:alpine
 
+# Podpis
 LABEL author="Blazej Typek"
 
-# Create app directory
+# Utworzenie folderu roboczego
 WORKDIR /usr/src/app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# Kopiowanie package.json i package-lock.json (dzieki * w nazwie pliku do skopiowania) na obraz
 COPY package*.json ./
 
+# Instalacja potrzebnego frameworku i modulu
 RUN npm install
 
-# Bundle app source
+# Kopiowanie pozostalych plikow aplikacji na obraz
 COPY . .
 
+# Ustawienie portu i uruchomienie serwera
 EXPOSE 8080
 CMD [ "node", "server.js" ]
 
