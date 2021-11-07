@@ -36,6 +36,6 @@ Aby utworzyć folder gdzie będzie znajdować się plik z hasłem należy wykorz
 
 Aby utworzyć plik z hasłem należy wykorzystać polecenie ```docker run --entrypoint htpasswd httpd:2 -Bbn testuser testpassword > auth/htpasswd```.
 
-Aby zatrzymać registry należy wykorzystać polecenie docker container stop registry.
+Aby zatrzymać registry należy wykorzystać polecenie ```docker container stop registry```.
 
 Aby uruchomić registry z podstawowym uwierzytelnianiem należy wykorzystać polecenie ```docker run -d -p 6677:6677 --restart=always --name registry -v "$(pwd)"/auth:/auth -e "REGISTRY_AUTH=htpasswd" -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd -v "$(pwd)"/certs:/certs -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key registry:2```.
