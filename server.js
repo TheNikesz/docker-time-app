@@ -2,9 +2,9 @@
 import express from 'express';
 import fetch from'node-fetch';
 
-// Stale - port, data i czas uruchomienia serwera i autor
+// Stale - port, data uruchomienia serwera i autor
 const PORT = 8080;
-const DATE = new Date().toLocaleString('pl-PL');
+const DATE = new Date().toLocaleDateString('pl-PL');
 const AUTHOR = 'Blazej Typek';
 
 // Funkcja pobierajaca date i czas na podstawie IP
@@ -15,11 +15,11 @@ async function getTimeFromIp(ip) {
     var data = await response.json();
 
     // Przygotowanie do zwrocenia odpowiedniej daty i czasu na podstawie strefy czasowej otrzymanej z API
-    var timezone = data['timezone'];
-    if (timezone == undefined) {
-      timezone = "Europe/Warsaw";
+    var timeZone = data['timezone'];
+    if (timeZone == undefined) {
+      timeZone = "Europe/Warsaw";
     }
-    var localDate = new Date().toLocaleString('pl-PL', {timezone});
+    var localDate = new Date().toLocaleString('pl-PL', {timeZone: timeZone});
 
     // Zwracanie daty i czasu
     return `${localDate}`;
@@ -33,8 +33,8 @@ async function getTimeFromIp(ip) {
 // Aplikacja
 const app = express();
 
-// Zapis w logach - port, data i czas uruchomienia serwera i autor
-console.log(`Data, czas uruchomienia: ${DATE}`);
+// Zapis w logach - port, data uruchomienia serwera i autor
+console.log(`Data uruchomienia: ${DATE}`);
 console.log(`Autor: ${AUTHOR}`);
 console.log(`Port: ${PORT}`);
 
